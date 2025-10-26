@@ -258,14 +258,20 @@
   background: #545b62;
 }
 
-.profile-avatar {
+.profile-avatar.editable {
   position: relative;
   width: 120px;
   height: 120px;
   cursor: pointer;
 }
 
-.profile-avatar::after {
+.profile-avatar.readonly {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.profile-avatar.editable::after {
   content: 'Change';
   position: absolute;
   top: 0;
@@ -285,7 +291,7 @@
   transition: opacity 0.2s ease;
 }
 
-.profile-avatar:hover::after {
+.profile-avatar.editable:hover::after {
   opacity: 5;
 }
 

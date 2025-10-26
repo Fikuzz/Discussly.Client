@@ -1,0 +1,132 @@
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+.home-page__header {
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 16px 0;
+}
+
+.home-page__header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home-page__title {
+  margin: 0;
+  color: #333;
+  font-size: 24px;
+}
+
+.home-page__main {
+  flex: 1;
+  padding: 24px 0;
+}
+
+.home-page__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 24px;
+}
+
+.home-page__sidebar {
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.home-page__sidebar-section {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+}
+
+.home-page__sidebar-section h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.home-page__content {
+  flex: 1;
+}
+
+.home-page__content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.home-page__content-header h2 {
+  margin: 0;
+  color: #333;
+  font-size: 20px;
+}
+
+.home-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.home-page__empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  background: white;
+  border-radius: 8px;
+  color: #666;
+}
+
+.home-page__pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.home-page__footer {
+  background: white;
+  border-top: 1px solid #e0e0e0;
+  padding: 16px 0;
+}
+
+.home-page__footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+  color: #666;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .home-page__container {
+    flex-direction: column;
+  }
+  
+  .home-page__sidebar {
+    width: 100%;
+  }
+  
+  .home-page__grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .home-page__content-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}

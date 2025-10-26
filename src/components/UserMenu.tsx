@@ -93,8 +93,8 @@ function UserMenu() {
             </div>
             <div className="user-details">
               <div className="user-name">{user.username}</div>
-              <div className="user-email">{user.email}</div>
-              <div className="user-karma">Карма: {user.karma}</div>
+              <div className="user-email">"null"</div>
+              <div className="user-karma">Карма: null</div>
             </div>
           </div>
 

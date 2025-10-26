@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, type ChangeEvent, type FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
 import { userService } from '../services/userService';
 import './ProfilePage.css';
@@ -82,8 +82,9 @@ const ProfilePage: React.FC = () => {
     <div className="profile-page">
       {/* Хедер профиля */}
       <div className="profile-header">
-        <div className="profile-avatar"
-          onClick={ OnAvatarChange }>
+        <div 
+            className={`profile-avatar ${profileOwner ? 'editable' : 'read-only'}`}
+            onClick={profileOwner ? OnAvatarChange : undefined}>
           {profile.avatarFileName ? (
             <div>
               <img
@@ -91,11 +92,11 @@ const ProfilePage: React.FC = () => {
                 alt="Avatar" 
                 className="avatar-xxl"
               />
-              <button className='avatar-delete-btn'
-                onClick={ (e) =>{
+              {profileOwner && <button className='avatar-delete-btn'
+                onClick={(e) =>{
                   e.stopPropagation();
                   OnAvatarDelete()
-                }}/>
+                }}/>}
             </div>
           ) : (
             <div className="avatar-placeholder-xxl">
