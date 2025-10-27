@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './HomePage.css'; // или HomePage.css
-import type CommunityDTO from '../types/community';
+import type { Community } from '../types/community';
 import CommunityCard from '../components/community/CommunityCard';
 import communityService from '../services/communityService';
 import { useNavigate } from 'react-router-dom';
@@ -8,11 +8,11 @@ import { useNavigate } from 'react-router-dom';
 const communitySvc = new communityService();
 
 const CommunityList: React.FC = () => {
-  const [communities, setCommunities] = React.useState<CommunityDTO[]>([]);
+  const [communities, setCommunities] = React.useState<Community[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
   const navigate = useNavigate();
 
-  const handleCommunityClick = (community: CommunityDTO) => {
+  const handleCommunityClick = (community: Community) => {
     navigate(`/community/${community.id}`);
   };
 

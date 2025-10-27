@@ -1,10 +1,20 @@
-.comment {
+.comment_card {
   display: flex;
+  align-items: stretch;
+  padding: 8px;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.comment {
+  display: grid;
   gap: 12px;
-  padding: 16px;
+  padding: 8px;
+  padding-bottom: 0;
+  width: 100%;
   background: white;
   border-radius: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 2px;
   border: 1px solid #f0f0f0;
 }
 
@@ -39,7 +49,7 @@
 
 .comment__header {
   display: flex;
-  align-items: center;
+  align-items: top;
   gap: 8px;
   margin-bottom: 8px;
 }
@@ -112,4 +122,11 @@
   .comment__actions {
     gap: 12px;
   }
+}
+
+.comment__subcomments {
+  display: flex;
+  gap : 12px;
+  flex-direction: column;
+  margin-top: 12px;
 }
