@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import type { CommunityDTO } from '../types/community';
+import type { Community } from '../types/community';
 import './CommunityPage.css';
 import { useAuth } from '../hooks/useAuth';
 import { useParams } from 'react-router-dom';
 import communityService from '../services/communityService';
 import { DateUtils } from '../utils/dateUtils';
+import CommunityPostList from '../components/community/CommunityPostList';
 
 const communitySvc = new communityService();
 
@@ -12,7 +13,7 @@ const CommunityPage: React.FC = () => {
     const { user, loading } = useAuth();
     const { id } = useParams<{ id : string}>();
     const [isLoading, setLoading] = useState(true);
-    const [community, setCommunity] = useState<CommunityDTO | null>(null);
+    const [community, setCommunity] = useState<Community | null>(null);
     const [activeTab, setActiveTab] = useState<'feed' | 'about' | 'moderators' | 'members'>('feed');
     const [isMember, setIsMember] = useState(false);
     const [isModerator, setIsModerator] = useState(false);
@@ -23,12 +24,11 @@ const CommunityPage: React.FC = () => {
     const handleCreatePost = () => console.log('Create post');
     const handleEditCommunity = () => console.log('Edit community');
     const handleManageModerators = () => console.log('Manage moderators');
-
     useEffect(() => {
         const fetchCommunity = async () => {
             if(loading) return;
             try{
-                let fetchedCommunity : CommunityDTO;
+                let fetchedCommunity : Community;
                 if(id){
                     fetchedCommunity = await communitySvc.getCommunitiesById(id);
                     setCommunity(fetchedCommunity);
@@ -178,31 +178,7 @@ const CommunityPage: React.FC = () => {
             {/* Контент вкладок */}
             <div className="tab-content">
               {activeTab === 'feed' && (
-                <div className="posts-feed">
-                  <div className="post-card">
-                    <div className="post-header">
-                      <div className="post-author">
-                        <div className="avatar-small">👤</div>
-                        <div className="author-info">
-                          <span className="author-name">Имя автора</span>
-                          <span className="post-date">2 часа назад</span>
-                        </div>
-                      </div>
-                      <button className="post-menu">⋯</button>
-                    </div>
-                    <div className="post-content">
-                      <p>Текст поста будет здесь...</p>
-                    </div>
-                    <div className="post-actions">
-                      <button className="action">👍 24</button>
-                      <button className="action">💬 8</button>
-                    </div>
-                  </div>
-                  
-                  <div className="empty-state">
-                    <p>Пока нет постов. Будьте первым!</p>
-                  </div>
-                </div>
+                <CommunityPostList key={id} id = { id } />
               )}
 
               {activeTab === 'about' && (

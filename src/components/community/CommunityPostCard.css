@@ -1,0 +1,100 @@
+/* Карточка поста */
+.post-card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.post-author {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.post-date {
+  font-size: 12px;
+  color: #888;
+}
+
+.post-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.post-menu:hover {
+  background: #f8f9fa;
+}
+
+.post-content {
+  margin-bottom: 12px;
+}
+
+.post-content p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.post-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.post-actions .action {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.post-actions .action:hover {
+  background: #f8f9fa;
+}
+
+.avatar-small{
+    width: 40px;
+    height: 40px;
+}
+
+.post-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #222;
+}
+
+.avatar-placeholder-small{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}

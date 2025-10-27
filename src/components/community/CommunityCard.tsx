@@ -1,10 +1,10 @@
 import React from 'react';
 import './CommunityCard.css';
-import type { CommunityDTO } from '../../types/community';
+import type { Community } from '../../types/community';
 
 interface CommunityCardProps {
-  community: CommunityDTO;
-  onClick?: (community: CommunityDTO) => void;
+  community: Community;
+  onClick?: (community: Community) => void;
 }
 
 const CommunityCard: React.FC<CommunityCardProps> = ({ community, onClick }) => {

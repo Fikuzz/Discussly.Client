@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './HomePage.css'; // или HomePage.css
-import type { CommunityDTO } from '../types/community';
+import type CommunityDTO from '../types/community';
 import CommunityCard from '../components/community/CommunityCard';
 import communityService from '../services/communityService';
 import { useNavigate } from 'react-router-dom';

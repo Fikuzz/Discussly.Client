@@ -1,5 +1,6 @@
 import { API_BASE_URL } from "../config/constants";
-import type { CommunityDTO } from "../types/community";
+import type { Community } from "../types/community";
+import type { Post } from "../types/post";
 
 class communityService{
     private baseURL: string = API_BASE_URL;
@@ -34,12 +35,16 @@ class communityService{
         return response;
     };
 
-    async getCommunities(): Promise<CommunityDTO[]> {
-        return await (await this.request("/Community", { method: "GET" })).json() as CommunityDTO[];
+    async getCommunities(): Promise<Community[]> {
+        return await (await this.request("/Community", { method: "GET" })).json() as Community[];
     }
 
-    async getCommunitiesById(id: string): Promise<CommunityDTO> {
-        return await (await this.request(`/Community/${id}`, { method: "GET" })).json() as CommunityDTO;
+    async getCommunitiesById(id: string): Promise<Community> {
+        return await (await this.request(`/Community/${id}`, { method: "GET" })).json() as Community;
+    }
+
+    async getCommunityPosts(id: string): Promise<Post[]> {
+        return await (await this.request(`/Community/${id}/post`, { method: "GET" })).json() as Post[];
     }
 }
 
