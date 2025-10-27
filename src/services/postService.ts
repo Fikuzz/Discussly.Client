@@ -1,8 +1,7 @@
 import { API_BASE_URL } from "../config/constants";
-import type { Community } from "../types/community";
-import type { Post } from "../types/post";
+import type { Comment } from "../types/comment";
 
-class communityService{
+class postService{
     private baseURL: string = API_BASE_URL;
 
     private getToken(): string | null {
@@ -35,17 +34,9 @@ class communityService{
         return response;
     };
 
-    async getCommunities(): Promise<Community[]> {
-        return await (await this.request("/Community", { method: "GET" })).json() as Community[];
-    }
-
-    async getCommunitiesById(id: string): Promise<Community> {
-        return await (await this.request(`/Community/${id}`, { method: "GET" })).json() as Community;
-    }
-
-    async getCommunityPosts(id: string): Promise<Post[]> {
-        return await (await this.request(`/Community/${id}/posts`, { method: "GET" })).json() as Post[];
+    async getPostComment (id: string): Promise<Comment[]> {
+        return await (await this.request(`/Post/${id}/comments`, { method: "GET" })).json() as Comment[];
     }
 }
 
-export default communityService;
+export default postService;

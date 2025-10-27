@@ -5,7 +5,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useParams } from 'react-router-dom';
 import communityService from '../services/communityService';
 import { DateUtils } from '../utils/dateUtils';
-import CommunityPostList from '../components/community/CommunityPostList';
+import CommunityPostList from '../components/post/CommunityPostList';
 
 const communitySvc = new communityService();
 

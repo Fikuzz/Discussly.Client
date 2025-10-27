@@ -2,6 +2,7 @@ import React from 'react';
 import './CommunityPostCard.css';
 import type { Post } from '../../types/post';
 import { DateUtils } from '../../utils/dateUtils';
+import CommentList from '../comment/CommentList';
 
 const CommunityPostCard: React.FC<{ post: Post }> = ({ post }) => {
     return (
@@ -33,6 +34,9 @@ const CommunityPostCard: React.FC<{ post: Post }> = ({ post }) => {
             <div className="post-actions">
               <button className="action">👍 {post.score}</button>
               <button className="action">💬 {post.commentCount}</button>
+            </div>
+            <div className="post-comments">
+              <CommentList parentId={post.id} isSubCom={false} />
             </div>
           </div>
     );
