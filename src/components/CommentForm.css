@@ -1,0 +1,43 @@
+.comment-form-main{
+    border-radius: 20px;
+    border: 1px solid #f0f0f0;
+    padding: 12px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-text{
+    box-sizing: border-box;
+    resize: vertical;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;;
+    font-size: 16px;
+    min-height: 40px;
+    width: 100%;
+    background-color: white;
+    border: 0;
+    color: #222;
+}
+
+.comment-text:focus{
+    outline: 0px;
+}
+
+.comment-panel{
+    display: flex;
+}
+
+.comment-tools{
+    flex: 1;
+}
+
+.comment-buttons{
+    flex-shrink: 0;
+}
+
+.button{
+    background-color: #585858;
+    border-radius: 20px;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin: 2px;
+}

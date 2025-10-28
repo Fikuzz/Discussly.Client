@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { Comment } from '../../types/comment';
 import { DateUtils } from '../../utils/dateUtils';
 import commentService from '../../services/commentService';
 import './CommentCard.css';
+import CommentForm from '../CommentForm';
 
 const commentSvc = new commentService();
 
@@ -10,6 +11,16 @@ const CommentCard: React.FC<{ comment: Comment, isOwner: boolean }> = ({ comment
   
   const [subCommnts, setSubComments] = React.useState<Comment[]>([]);
   const [loadingSubComms, setLoadingSubComms] = React.useState<boolean>(true);
+  const [commenting, setCommenting] = useState(false);
+
+  const onCommentingCancel = () => {
+    setCommenting(false);
+  }; 
+
+  const onCommentingStart = () => {
+    setCommenting(true);
+    console.log("setCommenting", true);
+  }
 
   React.useEffect(() => {
     const loadSubComments = async () => {
@@ -32,17 +43,17 @@ const CommentCard: React.FC<{ comment: Comment, isOwner: boolean }> = ({ comment
         <div className="comment__content">
           <div className="comment__header">
             <div className="comment__avatar">
-          {comment.author.avatarFileName ? (
-            <img 
-              src={`/avatars/${comment.author.avatarFileName}`} 
-              alt={comment.author.username}
-            />
-          ) : (
-            <div className="avatar-small">
-              {comment.author.username?.charAt(0).toUpperCase()}
-            </div>
-          )}
-        </div>
+              {comment.author.avatarFileName ? (
+                <img 
+                 src={`/avatars/${comment.author.avatarFileName}`} 
+                 alt={comment.author.username}
+               />
+             ) : (
+               <div className="avatar-small">
+                 {comment.author.username?.charAt(0).toUpperCase()}
+               </div>
+             )}
+           </div>
             <span className="comment__author">{comment.author.username}</span>
             <span className="comment__date">
               {DateUtils.normalize(comment.createdAt, "timeago")}
@@ -64,7 +75,7 @@ const CommentCard: React.FC<{ comment: Comment, isOwner: boolean }> = ({ comment
 
             <button 
               className="comment__action"
-              onClick={() => console.log("reply to comment", comment.id)}
+              onClick={() => onCommentingStart()}
             >
               💬 Ответить
             </button>
@@ -87,6 +98,9 @@ const CommentCard: React.FC<{ comment: Comment, isOwner: boolean }> = ({ comment
             </>
             )}
           </div>
+          {commenting &&
+            <CommentForm key={comment.id} onCancel={onCommentingCancel} post={comment.postId} comment={comment.id}/>
+          }
         </div>
         {/* Подкомментарии */}
         <div className="comment__subcomments">

@@ -12,6 +12,7 @@ import { useAuth } from "./hooks/useAuth";
 import React from "react";
 import HomePage from "./pages/HomePage";
 import CommunityPage from "./pages/CommunityPage";
+import PostPage from "./pages/PostPage";
 
 function RedirectToCurrentUser() {
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ function App() {
               <Route path="/profile" element={<RedirectToCurrentUser />} />
               <Route path="/profile/:id" element={<ProfilePage />} />
               <Route path="/community/:id" element={<CommunityPage />} />
+              <Route path="/post/:id" element={<PostPage />}/>
             </Routes>
           </main>
         </div>

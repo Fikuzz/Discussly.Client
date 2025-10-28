@@ -1,14 +1,20 @@
 import React, { useEffect } from 'react';
-import './CommunityPostList.css';
+import './PostList.css';
 import type { Post } from '../../types/post';
-import CommunityPostCard from './CommunityPostCard';
+import PostCard from './PostCard';
 import communityService from '../../services/communityService';
+import { useNavigate } from 'react-router-dom';
 
 const communitySvc = new communityService();
 
-const CommunityPostList: React.FC<{ id:string | undefined}> = ({ id }) => {
+const PostList: React.FC<{ id:string | undefined}> = ({ id }) => {
     const [posts, setPosts] = React.useState<Post[]>([]);
     const [loading, setLoading] = React.useState<boolean>(true);
+
+    const navigate = useNavigate();
+    const OnPostClick = (id:string) => {
+        navigate(`../post/${id}`);
+    }
 
     useEffect(() => {
         const loadPosts = async () => {
@@ -37,10 +43,12 @@ const CommunityPostList: React.FC<{ id:string | undefined}> = ({ id }) => {
     return (
         <div className="community-post-list">
             {posts.map(post => (
-                <CommunityPostCard key={post.id} post={post} />
+                <div className='community-post' onClick={() => OnPostClick(post.id)}>
+                    <PostCard key={post.id} post={post} />
+                </div>
             ))}
         </div>
     );
 }   
 
-export default CommunityPostList;
+export default PostList;

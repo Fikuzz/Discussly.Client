@@ -1,5 +1,6 @@
 import { API_BASE_URL } from "../config/constants";
 import type { Comment } from "../types/comment";
+import type { Post } from "../types/post";
 
 class postService{
     private baseURL: string = API_BASE_URL;
@@ -36,6 +37,10 @@ class postService{
 
     async getPostComment (id: string): Promise<Comment[]> {
         return await (await this.request(`/Post/${id}/comments`, { method: "GET" })).json() as Comment[];
+    }
+
+    async getPost (id: string): Promise<Post> {
+        return await (await this.request(`/Post/${id}`, { method: "GET" })).json() as Post;
     }
 }
 

@@ -5,7 +5,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useParams } from 'react-router-dom';
 import communityService from '../services/communityService';
 import { DateUtils } from '../utils/dateUtils';
-import CommunityPostList from '../components/post/CommunityPostList';
+import PostList from '../components/post/PostList';
 
 const communitySvc = new communityService();
 
@@ -178,7 +178,7 @@ const CommunityPage: React.FC = () => {
             {/* Контент вкладок */}
             <div className="tab-content">
               {activeTab === 'feed' && (
-                <CommunityPostList key={id} id = { id } />
+                <PostList key={id} id = { id } />
               )}
 
               {activeTab === 'about' && (

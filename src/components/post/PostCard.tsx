@@ -1,10 +1,10 @@
 import React from 'react';
-import './CommunityPostCard.css';
+import './PostCard.css';
 import type { Post } from '../../types/post';
 import { DateUtils } from '../../utils/dateUtils';
 import CommentList from '../comment/CommentList';
 
-const CommunityPostCard: React.FC<{ post: Post }> = ({ post }) => {
+const PostCard: React.FC<{ post: Post }> = ({ post }) => {
     return (
         <div className="post-card">
             <div className="post-header">
@@ -35,11 +35,8 @@ const CommunityPostCard: React.FC<{ post: Post }> = ({ post }) => {
               <button className="action">👍 {post.score}</button>
               <button className="action">💬 {post.commentCount}</button>
             </div>
-            <div className="post-comments">
-              <CommentList parentId={post.id} isSubCom={false} />
-            </div>
           </div>
     );
 };
 
-export default CommunityPostCard;
+export default PostCard;

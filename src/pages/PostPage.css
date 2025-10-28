@@ -1,0 +1,18 @@
+.comment-button{
+    background-color: white;
+    width: 100%;
+    border: 0;
+    border-radius: 20px;
+    text-align: left;
+    color: #b9b9b9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: text;
+}
+
+.comment-button:hover{
+    border: 0;
+}
+
+.comment-button:focus{
+    outline: 0;
+}
