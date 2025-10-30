@@ -96,10 +96,9 @@ const HomePage: React.FC = () => {
         </div>
       </main>
 
-      {/* Футер */}
       <footer className="home-page__footer">
         <div className="home-page__footer-content">
-          <p>&copy; 2024 Ваше приложение</p>
+          <p>&copy; 2025 Ваше приложение</p>
         </div>
       </footer>
     </div>

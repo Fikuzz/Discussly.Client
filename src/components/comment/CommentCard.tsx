@@ -19,7 +19,6 @@ const CommentCard: React.FC<{ comment: Comment, isOwner: boolean }> = ({ comment
 
   const onCommentingStart = () => {
     setCommenting(true);
-    console.log("setCommenting", true);
   }
 
   React.useEffect(() => {

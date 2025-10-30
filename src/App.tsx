@@ -13,6 +13,8 @@ import React from "react";
 import HomePage from "./pages/HomePage";
 import CommunityPage from "./pages/CommunityPage";
 import PostPage from "./pages/PostPage";
+import SideBar from "./components/SideBar";
+import CreatePostForm from "./pages/CreatePostForm";
 
 function RedirectToCurrentUser() {
   const navigate = useNavigate();
@@ -38,15 +40,19 @@ function App() {
       <Router>
         <div className="app">
           <Header />
-          <main className="main-content">
-            <Routes>
-              <Route path="/" element={<HomePage/>}/>
-              <Route path="/profile" element={<RedirectToCurrentUser />} />
-              <Route path="/profile/:id" element={<ProfilePage />} />
-              <Route path="/community/:id" element={<CommunityPage />} />
-              <Route path="/post/:id" element={<PostPage />}/>
-            </Routes>
-          </main>
+          <div className="grid-container">
+            <SideBar/>
+            <main className="main-content">
+              <Routes>
+                <Route path="/" element={<HomePage/>}/>
+                <Route path="/profile" element={<RedirectToCurrentUser />} />
+                <Route path="/profile/:id" element={<ProfilePage />} />
+                <Route path="/community/:id" element={<CommunityPage />} />
+                <Route path="/community/:id/submit" element={<CreatePostForm/>} />
+                <Route path="/post/:id" element={<PostPage />}/>
+              </Routes>
+            </main>
+          </div>
         </div>
       </Router>
     </AuthProvider>

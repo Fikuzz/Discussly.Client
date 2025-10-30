@@ -1,46 +1,33 @@
-import { API_BASE_URL } from "../config/constants";
 import type { Comment } from "../types/comment";
 import type { Post } from "../types/post";
+import BaseService from "./baseService";
+import type { CreatePost } from "../types/post";
 
-class postService{
-    private baseURL: string = API_BASE_URL;
-
-    private getToken(): string | null {
-        return localStorage.getItem("authToken");
-    }
-
-    private async request(
-        endpoint: string,
-        options: RequestInit = {}
-    ): Promise<Response> {
-        const url = `${this.baseURL}${endpoint}`;
-        const token = this.getToken();
-
-        const headers: Record<string, string> = {
-            ...(token ? { Authorization: `Bearer ${token}` } : {})
-        };
-
-        if (options.headers) {
-            Object.assign(headers, options.headers);
-        }
-
-        const config: RequestInit = {
-            headers,
-            ...options,
-        };
-
-        const response = await fetch(url, config);
-        if (!response.ok) throw new Error(`Error: ${response.status}`);
-
-        return response;
-    };
-
+class postService extends BaseService{
     async getPostComment (id: string): Promise<Comment[]> {
-        return await (await this.request(`/Post/${id}/comments`, { method: "GET" })).json() as Comment[];
+        return await this.get<Comment[]>(`/Post/${id}/comments`);
     }
 
     async getPost (id: string): Promise<Post> {
-        return await (await this.request(`/Post/${id}`, { method: "GET" })).json() as Post;
+        return await this.get<Post>(`/Post/${id}`);
+    }
+
+    async getUserVote (id: string): Promise<number> {
+        return await this.get<number>(`/Post/${id}/vote`);
+    }
+
+    async sendUserVote (id: string, vote: number): Promise<boolean> {
+        return await this.post<boolean, number>(`/Post/${id}/vote?voteType=${vote}`, vote);
+    }
+
+    async createPost (post : CreatePost): Promise<boolean> {
+        const formData = this.createFormData({
+            title: post.Title,
+            contentText: post.ContentText,
+            communityId: post.CommunityId,
+            mediaFiles: post.MediaFiles
+        });
+        return await this.post<boolean, FormData>(`/Post`, formData);
     }
 }
 

@@ -6,11 +6,13 @@
 /* Хедер сообщества */
 .community-header {
   background: white;
+  border-radius: 40px 40px 0 0;
   border-bottom: 1px solid #e0e0e0;
 }
 
 .community-header__background {
   height: 200px;
+  border-radius: 40px 40px 0 0;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
@@ -27,7 +29,6 @@
 .community-header__main {
   display: flex;
   gap: 24px;
-  align-items: flex-end;
 }
 
 .community-header__actions {
@@ -91,7 +92,7 @@
 }
 
 .community-info__title {
-  margin: 0 0 8px 0;
+  margin: 0 0 15px 0;
   font-size: 28px;
   font-weight: 700;
   color: #333;

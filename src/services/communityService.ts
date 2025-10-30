@@ -1,50 +1,39 @@
-import { API_BASE_URL } from "../config/constants";
-import type { Community } from "../types/community";
+import type { Community, CreateCommunity, Member } from "../types/community";
 import type { Post } from "../types/post";
+import BaseService from "./baseService";
 
-class communityService{
-    private baseURL: string = API_BASE_URL;
-
-    private getToken(): string | null {
-        return localStorage.getItem("authToken");
-    }
-
-    private async request(
-        endpoint: string,
-        options: RequestInit = {}
-    ): Promise<Response> {
-        const url = `${this.baseURL}${endpoint}`;
-        const token = this.getToken();
-
-        const headers: Record<string, string> = {
-            ...(token ? { Authorization: `Bearer ${token}` } : {})
-        };
-
-        if (options.headers) {
-            Object.assign(headers, options.headers);
-        }
-
-        const config: RequestInit = {
-            headers,
-            ...options,
-        };
-
-        const response = await fetch(url, config);
-        if (!response.ok) throw new Error(`Error: ${response.status}`);
-
-        return response;
-    };
+class communityService extends BaseService{
 
     async getCommunities(): Promise<Community[]> {
-        return await (await this.request("/Community", { method: "GET" })).json() as Community[];
+        return await this.get<Community[]>("/Community");
     }
 
     async getCommunitiesById(id: string): Promise<Community> {
-        return await (await this.request(`/Community/${id}`, { method: "GET" })).json() as Community;
+        return await this.get<Community>(`/Community/${id}`);
     }
 
     async getCommunityPosts(id: string): Promise<Post[]> {
-        return await (await this.request(`/Community/${id}/posts`, { method: "GET" })).json() as Post[];
+        return await this.get<Post[]>(`/Community/${id}/posts`);
+    }
+
+    async createCommunity(community: CreateCommunity): Promise<string> {
+        return await this.post<string, CreateCommunity>(`/Community/create`, community);
+    }
+
+    async subscribe(id: string): Promise<boolean> {
+        return await this.post<boolean, string>(`/Community/${id}/subscribe`);
+    }
+
+    async unsubscribe(id: string): Promise<boolean> {
+        return await this.post<boolean, string>(`/Community/${id}/unsubscribe`);
+    }
+
+    async checkSubscription(id: string): Promise<boolean> {
+        return await this.get<boolean>(`/Community/${id}/checkSubscription`);
+    }
+
+    async getSubscriptions(id: string): Promise<Member[]> {
+        return await this.get<Member[]>(`/Community/${id}/subscriptions`);
     }
 }
 

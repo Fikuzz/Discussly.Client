@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 import communityService from '../services/communityService';
 import { DateUtils } from '../utils/dateUtils';
 import PostList from '../components/post/PostList';
+import { useNavigate } from 'react-router-dom';
+import MembersTab from '../components/community/MembersTab';
 
 const communitySvc = new communityService();
 
@@ -19,9 +21,42 @@ const CommunityPage: React.FC = () => {
     const [isModerator, setIsModerator] = useState(false);
     const createdAt = DateUtils.normalize(community?.createdAt || 'date');
 
+    const navigate = useNavigate();
+
     // Заглушки функций
-    const handleJoinCommunity = () => console.log('Join community');
-    const handleCreatePost = () => console.log('Create post');
+    const handleJoinCommunity = async () => {
+      try{
+        if(user)
+        {
+          if(id)
+          {
+            await communitySvc.subscribe(id);
+            setIsMember(true);
+          }
+        }
+      }
+      catch(exeption)
+      {
+        console.log(exeption);
+      }
+    };
+    const handleLeaveCommunity = async () => {
+      try{
+        if(user)
+        {
+          if(id)
+          {
+            await communitySvc.unsubscribe(id);
+            setIsMember(false);
+          }
+        }
+      }
+      catch(exeption)
+      {
+        console.log(exeption);
+      }
+    };
+    const handleCreatePost = () => navigate('submit');
     const handleEditCommunity = () => console.log('Edit community');
     const handleManageModerators = () => console.log('Manage moderators');
     useEffect(() => {
@@ -30,11 +65,10 @@ const CommunityPage: React.FC = () => {
             try{
                 let fetchedCommunity : Community;
                 if(id){
-                    fetchedCommunity = await communitySvc.getCommunitiesById(id);
-                    setCommunity(fetchedCommunity);
-                    // Здесь можно проверить, является ли пользователь участником или модератором
-                    setIsMember(false); // Заглушка
-                    setIsModerator(false); // Заглушка
+                  fetchedCommunity = await communitySvc.getCommunitiesById(id);
+                  setCommunity(fetchedCommunity);
+                  const isMember = await communitySvc.checkSubscription(id);
+                  setIsMember(isMember);
                 }
             }
             catch(error){
@@ -108,7 +142,16 @@ const CommunityPage: React.FC = () => {
             )}
             
             {isMember ? (
-              <button className="btn btn--outline">✅ Вы участник</button>
+              <>
+                <button 
+                  className='btn btn--outline'
+                  onClick={handleCreatePost}>
+                  ➕ Создать пост
+                </button>
+
+                <button className="btn btn--outline"
+                  onClick={handleLeaveCommunity}>✅ Вы участник</button>
+              </>
             ) : (
               <button 
                 className="btn btn--primary"
@@ -250,29 +293,7 @@ const CommunityPage: React.FC = () => {
               )}
 
               {activeTab === 'members' && (
-                <div className="members-tab">
-                  <div className="section-header">
-                    <h3>Участники сообщества</h3>
-                    <div className="search-box">
-                      <input type="text" placeholder="Поиск участников..." />
-                    </div>
-                  </div>
-                  
-                  <div className="users-grid">
-                    {[1, 2, 3, 4, 5, 6].map(i => (
-                      <div key={i} className="user-card">
-                        <div className="user-avatar">👤</div>
-                        <div className="user-name">Участник {i}</div>
-                        <div className="user-join-date">В сообществе 2 месяца</div>
-                        {isModerator && (
-                          <button className="btn btn--danger btn--small">
-                            Исключить
-                          </button>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <MembersTab key={id} isModerator={false} communityId={id}/>
               )}
             </div>
           </main>

@@ -16,3 +16,8 @@
 .comment-button:focus{
     outline: 0;
 }
+
+.main-post-content{
+    min-width: 400px;
+    width: 100%;
+}

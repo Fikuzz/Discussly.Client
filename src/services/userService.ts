@@ -56,7 +56,6 @@ class UserService {
   async updateAvatar(avatarFile: File): Promise<string> {
     const formData = new FormData();
     formData.append("formFile", avatarFile);
-    console.log("Form Data: ", formData.get("formFile"));
     return await (await this.request("/User/avatar", {
       method: "PUT",
       body: formData,

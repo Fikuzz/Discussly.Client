@@ -28,8 +28,6 @@ class commentService{
             },
         };
 
-        console.log('Request headers:', config.headers);
-
         const response = await fetch(url, config);
         if (!response.ok) throw new Error(`Error: ${response.status}`);
 
