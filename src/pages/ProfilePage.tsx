@@ -114,11 +114,11 @@ const ProfilePage: React.FC = () => {
               <span className="stat-label">Карма</span>
             </div>
             <div className="stat">
-              <span className="stat-value">0</span>
+              <span className="stat-value">{profile.postCount}</span>
               <span className="stat-label">Постов</span>
             </div>
             <div className="stat">
-              <span className="stat-value">0</span>
+              <span className="stat-value">{profile.commentCount}</span>
               <span className="stat-label">Комментариев</span>
             </div>
           </div>

@@ -20,16 +20,16 @@ class communityService extends BaseService{
         return await this.post<string, CreateCommunity>(`/Community/create`, community);
     }
 
-    async subscribe(id: string): Promise<boolean> {
-        return await this.post<boolean, string>(`/Community/${id}/subscribe`);
+    async subscribe(id: string): Promise<Member> {
+        return await this.post<Member, string>(`/Community/${id}/subscribe`);
     }
 
     async unsubscribe(id: string): Promise<boolean> {
         return await this.post<boolean, string>(`/Community/${id}/unsubscribe`);
     }
 
-    async checkSubscription(id: string): Promise<boolean> {
-        return await this.get<boolean>(`/Community/${id}/checkSubscription`);
+    async checkSubscription(id: string): Promise<Member | undefined> {
+        return await this.get<Member | undefined>(`/Community/${id}/checkSubscription`);
     }
 
     async getSubscriptions(id: string): Promise<Member[]> {

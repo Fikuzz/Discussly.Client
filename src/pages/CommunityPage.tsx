@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import type { Community } from '../types/community';
+import type { Community, Member } from '../types/community';
 import './CommunityPage.css';
 import { useAuth } from '../hooks/useAuth';
 import { useParams } from 'react-router-dom';
@@ -17,8 +17,7 @@ const CommunityPage: React.FC = () => {
     const [isLoading, setLoading] = useState(true);
     const [community, setCommunity] = useState<Community | null>(null);
     const [activeTab, setActiveTab] = useState<'feed' | 'about' | 'moderators' | 'members'>('feed');
-    const [isMember, setIsMember] = useState(false);
-    const [isModerator, setIsModerator] = useState(false);
+    const [Member, setMember] = useState<Member | undefined>(undefined);
     const createdAt = DateUtils.normalize(community?.createdAt || 'date');
 
     const navigate = useNavigate();
@@ -30,8 +29,8 @@ const CommunityPage: React.FC = () => {
         {
           if(id)
           {
-            await communitySvc.subscribe(id);
-            setIsMember(true);
+            const member = await communitySvc.subscribe(id);
+            setMember(member);
           }
         }
       }
@@ -47,7 +46,7 @@ const CommunityPage: React.FC = () => {
           if(id)
           {
             await communitySvc.unsubscribe(id);
-            setIsMember(false);
+            setMember(undefined);
           }
         }
       }
@@ -68,7 +67,7 @@ const CommunityPage: React.FC = () => {
                   fetchedCommunity = await communitySvc.getCommunitiesById(id);
                   setCommunity(fetchedCommunity);
                   const isMember = await communitySvc.checkSubscription(id);
-                  setIsMember(isMember);
+                  setMember(isMember);
                 }
             }
             catch(error){
@@ -106,7 +105,7 @@ const CommunityPage: React.FC = () => {
                   </div>
                 )}
               </div>
-              {isModerator && (
+              {(Member?.role == 2 || Member?.role == 1) && (
                 <button 
                   className="community-avatar__edit-btn"
                   onClick={() => console.log('Edit avatar')}
@@ -132,7 +131,7 @@ const CommunityPage: React.FC = () => {
           </div>
 
           <div className="community-header__actions">
-            {isModerator && (
+            {(Member?.role == 2 || Member?.role == 1) && (
               <button 
                 className="btn btn--secondary"
                 onClick={handleEditCommunity}
@@ -141,7 +140,7 @@ const CommunityPage: React.FC = () => {
               </button>
             )}
             
-            {isMember ? (
+            {(Member) ? (
               <>
                 <button 
                   className='btn btn--outline'
@@ -200,7 +199,7 @@ const CommunityPage: React.FC = () => {
           {/* Основная колонка */}
           <main className="community-main">
             {/* Кнопка создания поста (для участников) */}
-            {isMember && (
+            {Member != undefined && (
               <div className="create-post-card">
                 <div className="create-post-card__input">
                   <div className="avatar-small">👤</div>
@@ -232,27 +231,18 @@ const CommunityPage: React.FC = () => {
                   </div>
                   
                   <div className="info-card">
-                    <h3>Правила сообщества</h3>
-                    <ul className="rules-list">
-                      <li>Будьте вежливы и уважайте других</li>
-                      <li>Публикуйте релевантный контент</li>
-                      <li>Соблюдайте правила платформы</li>
-                    </ul>
-                  </div>
-                  
-                  <div className="info-card">
                     <h3>Статистика</h3>
                     <div className="stats-grid">
                       <div className="stat-item">
-                        <strong>1.2K</strong>
+                        <strong>{community?.participantCount}</strong>
                         <span>Участников</span>
                       </div>
                       <div className="stat-item">
-                        <strong>156</strong>
+                        <strong>{community?.postCount}</strong>
                         <span>Постов</span>
                       </div>
                       <div className="stat-item">
-                        <strong>2.4K</strong>
+                        <strong>none</strong>
                         <span>Комментариев</span>
                       </div>
                     </div>
@@ -264,7 +254,7 @@ const CommunityPage: React.FC = () => {
                 <div className="moderators-tab">
                   <div className="section-header">
                     <h3>Модераторы сообщества</h3>
-                    {isModerator && (
+                    {(Member?.role == 2 || Member?.role == 1) && (
                       <button 
                         className="btn btn--primary btn--small"
                         onClick={handleManageModerators}
@@ -282,7 +272,7 @@ const CommunityPage: React.FC = () => {
                           <div className="user-role">Модератор</div>
                         </div>
                       </div>
-                      {isModerator && (
+                      {(Member?.role == 2 || Member?.role == 1) && (
                         <button className="btn btn--danger btn--small">
                           Удалить
                         </button>

@@ -50,10 +50,10 @@ return(
                     (<img
                         src={`/avatars/${member.user.avatarFileName}`}
                         alt="Avatar" 
-                        className="avatar-xxl"
+                        className="avatar-l"
                     />) :
                     (
-                        <div className="avatar-placeholder-xxl">
+                        <div className="avatar-placeholder-l">
                             {member.user.username?.charAt(0).toUpperCase()}
                         </div>
                     )

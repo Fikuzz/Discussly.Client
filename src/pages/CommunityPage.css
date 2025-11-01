@@ -301,16 +301,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.info-card h3 {
-  margin: 0 0 12px 0;
-  color: #333;
-}
-
-.rules-list {
-  margin: 0;
-  padding-left: 20px;
-}
-
 .rules-list li {
   margin-bottom: 8px;
   color: #555;

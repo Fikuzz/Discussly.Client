@@ -10,13 +10,15 @@ const postSvc = new PostService();
 const PostCard: React.FC<{ post: Post }> = ({ post }) => {
   const {user} = useAuth();
   const [userVote, setUserVote] = useState(0);
+  const [postScore, setPostScore] = useState(0);
 
-  const handlerVote = async(vote: number) =>{
+  const handlerVote = async(vote: number, e : React.MouseEvent) =>{
+    e.stopPropagation();
     if(user){
       vote = userVote == vote ? 0 : vote;
-      const responce = await postSvc.sendUserVote(post.id, vote);
-      if(responce)
-        setUserVote(vote);
+      await postSvc.sendUserVote(post.id, vote);
+      setPostScore(postScore - userVote + vote)
+      setUserVote(vote);
     }
   }
 
@@ -34,6 +36,7 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => {
       }
     }
 
+    setPostScore(post.score);
     getVote();
   }, []);
   
@@ -65,13 +68,13 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => {
           </div>
           <div className="post-actions">
             <div className='vote-action'>
-              <button className={`vote upvote ${userVote > 0 ? "active" : ""}`} onClick={() => handlerVote(1)}>
+              <button className={`vote upvote ${userVote > 0 ? "active" : ""}`} onClick={(e) => handlerVote(1, e)}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                   <path d="M21 19l-9-9-9 9"/>
                 </svg>
               </button>
-              <span className='vote-score'>{post.score}</span>
-              <button className={`vote downvote ${userVote < 0 ? "active" : ""}`} onClick={() => handlerVote(-1)}>
+              <span className='vote-score'>{postScore}</span>
+              <button className={`vote downvote ${userVote < 0 ? "active" : ""}`} onClick={(e) => handlerVote(-1, e)}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                   <path d="M21 11l -9 9 -9 -9"/>
                 </svg>

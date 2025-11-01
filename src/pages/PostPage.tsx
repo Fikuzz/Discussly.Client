@@ -49,10 +49,13 @@ const PostPage: React.FC = () => {
     return(
         <main className="main-post-content">
             <article className="post-content">
-                <PostCard key={id} post={post}/>
+                {post &&
+                    <PostCard key={id} post={post}/>
+                }
             </article>
             <div>
                 {commenting ? (
+                    post &&
                     <CommentForm post={post.id} onCancel={onCommentingCancel} comment={undefined}/>
                 ):(
                     <button className="comment-button"
@@ -63,7 +66,9 @@ const PostPage: React.FC = () => {
             </div>
             <section className="comment-tree-content" aria-label="Комментарии">
                 <h2 className="comment-tree__title">Комментарии</h2>
-                <CommentList parentId={id} isSubCom={false}/>
+                {id &&
+                    <CommentList parentId={id} isSubCom={false}/>
+                }
             </section>
         </main>
     );

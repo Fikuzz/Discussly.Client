@@ -18,5 +18,6 @@ export interface CreateCommunity {
 
 export interface Member {
     user: User;
+    role: number;
     memberAt: string;
 }
