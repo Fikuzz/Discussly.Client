@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
-import { useAuth } from '../hooks/useAuth';
-import { signalRService } from '../services/signalRService';
+import { useAuth } from '../../hooks/useAuth';
+import { signalRService } from '../../services/signalRService';
 import { useNavigate } from 'react-router-dom';
 import './UserMenu.css';
 

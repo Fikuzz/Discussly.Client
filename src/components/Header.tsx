@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import './Header.css';
-import AuthModal from './AuthModal';
-import UserMenu from './UserMenu';
+import AuthModal from './user/AuthModal';
+import UserMenu from './user/UserMenu';
 import { useNavigate } from 'react-router-dom';
 
 function Header() {

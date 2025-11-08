@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import type { Comment } from '../../types/comment';
-import { DateUtils } from '../../utils/dateUtils';
 import commentService from '../../services/commentService';
 import './CommentCard.css';
-import CommentForm from '../CommentForm';
+import CommentForm from './CommentForm';
+import UserInfo from '../user/UserInfo';
 
 const commentSvc = new commentService();
 
@@ -41,23 +41,9 @@ const CommentCard: React.FC<{ comment: Comment, isOwner: boolean }> = ({ comment
       <div className="comment">
         <div className="comment__content">
           <div className="comment__header">
-            <div className="comment__avatar">
-              {comment.author.avatarFileName ? (
-                <img 
-                 src={`/avatars/${comment.author.avatarFileName}`} 
-                 alt={comment.author.username}
-               />
-             ) : (
-               <div className="avatar-small">
-                 {comment.author.username?.charAt(0).toUpperCase()}
-               </div>
-             )}
-           </div>
-            <span className="comment__author">{comment.author.username}</span>
-            <span className="comment__date">
-              {DateUtils.normalize(comment.createdAt, "timeago")}
-              {comment.isEdited && <span> (ред.)</span>}
-            </span>
+            <UserInfo
+              user = {comment.author}
+              createdAt= {comment.createdAt}/>
           </div>
 
           <div className="comment__text">

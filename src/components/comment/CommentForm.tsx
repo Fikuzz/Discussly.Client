@@ -1,8 +1,8 @@
 import "./CommentForm.css"
-import commentService from "../services/commentService"
-import { useAuth } from "../hooks/useAuth";
+import commentService from "../../services/commentService";
+import { useAuth } from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
-import type { AddComment } from "../types/comment";
+import type { AddComment } from "../../types/comment";
 
 const commentSvc = new commentService();
 

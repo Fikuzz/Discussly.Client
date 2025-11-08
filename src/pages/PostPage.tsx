@@ -5,7 +5,7 @@ import postService from "../services/postService";
 import type { Post } from "../types/post";
 import "./PostPage.css"
 import CommentList from "../components/comment/CommentList";
-import CommentForm from "../components/CommentForm";
+import CommentForm from "../components/comment/CommentForm";
 
 const postSvc = new postService();
 

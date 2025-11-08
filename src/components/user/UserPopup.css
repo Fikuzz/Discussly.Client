@@ -1,0 +1,47 @@
+.popup-overlay {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  animation: overlayFadeIn 0.2s ease;
+  cursor: default;
+}
+
+.popup-content {
+    position: fixed;
+    background: white;
+    border: 1px solid #e1e1e1;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    min-width: 300px;
+    max-width: 90vw;
+    animation: popupSlideIn 0.2s ease;
+    padding: 10px;
+}
+
+@keyframes popupSlideIn {
+  from { 
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.user-main{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.user-info{
+    display: flex;
+    flex-direction: column;
+    align-items: normal;
+    gap: 0;
+}

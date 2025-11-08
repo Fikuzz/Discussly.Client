@@ -22,7 +22,6 @@ const CommunityPage: React.FC = () => {
 
     const navigate = useNavigate();
 
-    // Заглушки функций
     const handleJoinCommunity = async () => {
       try{
         if(user)
@@ -66,8 +65,8 @@ const CommunityPage: React.FC = () => {
                 if(id){
                   fetchedCommunity = await communitySvc.getCommunitiesById(id);
                   setCommunity(fetchedCommunity);
-                  const isMember = await communitySvc.checkSubscription(id);
-                  setMember(isMember);
+                  const member = await communitySvc.checkSubscription(id);
+                  setMember(member);
                 }
             }
             catch(error){

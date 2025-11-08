@@ -21,7 +21,7 @@ class communityService extends BaseService{
     }
 
     async subscribe(id: string): Promise<Member> {
-        return await this.post<Member, string>(`/Community/${id}/subscribe`);
+        return await this.post<Member>(`/Community/${id}/subscribe`);
     }
 
     async unsubscribe(id: string): Promise<boolean> {

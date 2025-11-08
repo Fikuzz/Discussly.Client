@@ -1,0 +1,45 @@
+.post-author {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-name {
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+}
+
+.author-name:hover{
+  text-decoration:underline;
+}
+
+.post-date {
+  font-size: 12px;
+  color: #888;
+}
+
+.avatar-small{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.avatar-placeholder-small{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
