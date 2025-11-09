@@ -50,7 +50,7 @@ const UserPopup: React.FC<UserPopupProps> = ({
         navigate(`../profile/${userId}`);
     }
 
-    const handleOnClose = (e: MouseEvent) =>{
+    const handleOnClose = (e: React.MouseEvent) =>{
         e.stopPropagation();
         onClose();
     }
@@ -77,11 +77,22 @@ const UserPopup: React.FC<UserPopupProps> = ({
                     )}
                     <div className="user-info">
                         <span className="author-name" onClick={handleProfile}>{profile?.username}</span>
-                        <span className="post-date">{profile && DateUtils.normalize(profile?.createdAt, "date")}</span>
+                        <span className="author-date">{profile && DateUtils.normalize(profile?.createdAt, "date")}</span>
                     </div>
                 </div>
-                <div>
-                    <span>Карма: {profile?.karma}</span>
+                <div className="user-stats">
+                    <div>
+                        <span className="stat-value">{profile?.karma}</span>
+                        <span className="stat-name">карма</span>
+                    </div>
+                    <div>
+                        <span className="stat-value">{profile?.postCount}</span>
+                        <span className="stat-name">постов</span>
+                    </div>
+                    <div>
+                        <span className="stat-value">{profile?.commentCount}</span>
+                        <span className="stat-name">комментариев</span>
+                    </div>
                 </div>
             </div>
         </div>

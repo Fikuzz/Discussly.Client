@@ -45,3 +45,27 @@
     align-items: normal;
     gap: 0;
 }
+
+.author-date{
+  font-size: 12px;
+}
+
+.user-stats{
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  padding: 4px 8px;
+  margin: 12px 0;
+  border-radius: 6px;
+}
+
+.user-stats{
+  display: flex;
+  gap: 10px;
+}
+
+.stat-value{
+  font-size: 16px;
+}
+
+.stat-name{
+  font-size: 14px;
+}

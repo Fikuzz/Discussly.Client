@@ -6,6 +6,8 @@ export interface Comment {
     postId: string;
     author: User;
     createdAt: string;
+    commentCount: number;
+    score: number;
     isEdited: boolean;
 }
 

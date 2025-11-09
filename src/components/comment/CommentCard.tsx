@@ -4,11 +4,16 @@ import commentService from '../../services/commentService';
 import './CommentCard.css';
 import CommentForm from './CommentForm';
 import UserInfo from '../user/UserInfo';
+import Vote from './Vote';
+import { useAuth } from '../../hooks/useAuth';
 
 const commentSvc = new commentService();
 
 const CommentCard: React.FC<{ comment: Comment, isOwner: boolean }> = ({ comment, isOwner }) => {
   
+  const {user} = useAuth();
+  const [userVote, setUserVote] = useState(0);
+  const [commentScore, setCommentScore] = useState(0); 
   const [subCommnts, setSubComments] = React.useState<Comment[]>([]);
   const [loadingSubComms, setLoadingSubComms] = React.useState<boolean>(true);
   const [commenting, setCommenting] = useState(false);
@@ -19,6 +24,15 @@ const CommentCard: React.FC<{ comment: Comment, isOwner: boolean }> = ({ comment
 
   const onCommentingStart = () => {
     setCommenting(true);
+  }
+
+  const handleVote = async(vote: number) => {
+    if(user){
+      vote = userVote == vote ? 0 : vote;
+      await commentSvc.sendUserVote(comment.id, vote);
+      setCommentScore(commentScore - userVote + vote);
+      setUserVote(vote);
+    }
   }
 
   React.useEffect(() => {
@@ -32,9 +46,27 @@ const CommentCard: React.FC<{ comment: Comment, isOwner: boolean }> = ({ comment
         setLoadingSubComms(false);
       }
     };
-
+    
+    setCommentScore(comment.score);
     loadSubComments();
   }, [comment.id]);
+
+  React.useEffect(() => {
+    const getUserVote = async() => {
+      try{
+        if(user)
+        {
+          const userVote = await commentSvc.getUserVote(comment.id);
+          setUserVote(userVote);
+        }
+      }
+      catch(exeption){
+        console.log(exeption);
+      }
+    }
+
+    getUserVote();
+  }, [comment.id, user])
 
   return (
     <div className="comment_card">
@@ -51,12 +83,8 @@ const CommentCard: React.FC<{ comment: Comment, isOwner: boolean }> = ({ comment
           </div>
 
           <div className="comment__actions">
-            <button 
-              className="comment__action"
-              onClick={() => console.log("like comment", comment.id)}
-            >
-              👍 null
-            </button>
+            
+            <Vote userVote={userVote} score={commentScore} handleVote={handleVote}/>
 
             <button 
               className="comment__action"
