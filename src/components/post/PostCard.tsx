@@ -38,7 +38,7 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => {
 
     setPostScore(post.score);
     getVote();
-  }, []);
+  }, [post, user]);
   
   return (
       <div className="post-card">

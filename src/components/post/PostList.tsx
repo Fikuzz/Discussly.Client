@@ -44,7 +44,7 @@ const PostList: React.FC<{ id:string | undefined}> = ({ id }) => {
         <div className="community-post-list">
             {posts.map(post => (
                 <div key={post.id} className='community-post' onClick={() => OnPostClick(post.id)}>
-                    <PostCard post={post} />
+                    <PostCard post={post}/>
                 </div>
             ))}
         </div>

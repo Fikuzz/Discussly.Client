@@ -49,7 +49,7 @@ const CommentCard: React.FC<{ comment: Comment, isOwner: boolean }> = ({ comment
     
     setCommentScore(comment.score);
     loadSubComments();
-  }, [comment.id]);
+  }, [comment]);
 
   React.useEffect(() => {
     const getUserVote = async() => {

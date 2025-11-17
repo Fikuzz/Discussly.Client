@@ -4,8 +4,10 @@ import './Header.css';
 import AuthModal from './user/AuthModal';
 import UserMenu from './user/UserMenu';
 import { useNavigate } from 'react-router-dom';
+import { useTokenCheck } from '../hooks/useTokenCheck';
 
 function Header() {
+  useTokenCheck();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isAuthenticated } = useAuth();
 
