@@ -1,13 +1,11 @@
 .comment-list {
   background: white;
   border-radius: 12px;
-  padding: 20px;
-  padding-left: 0;
+  padding: 28px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .comment-list__header {
-  border-bottom: 1px solid #f0f0f0;
   padding: 16px 0;
 }
 
@@ -18,65 +16,8 @@
   color: #333;
 }
 
-.comment-list__content {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
 .comment-list__empty {
   text-align: center;
   padding: 40px 20px;
   color: #666;
-}
-
-.comment-list__empty p {
-  margin: 0 0 8px 0;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.comment-list__empty span {
-  font-size: 14px;
-  color: #888;
-}
-
-/* Вариант с разделителями между комментариями */
-.comment-list--divided .comment-list__content {
-  gap: 0;
-}
-
-.comment-list--divided .comment-list__content > * {
-  border-bottom: 1px solid #f8f9fa;
-  padding-bottom: 16px;
-  margin-bottom: 16px;
-}
-
-.comment-list--divided .comment-list__content > *:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-  margin-bottom: 0;
-}
-
-/* Компактный вариант */
-.comment-list--compact {
-  padding: 16px;
-}
-
-.comment-list--compact .comment-list__content {
-  gap: 12px;
-}
-
-/* Темная тема */
-.comment-list--dark {
-  background: #2d3748;
-  color: white;
-}
-
-.comment-list--dark .comment-list__title {
-  color: white;
-}
-
-.comment-list--dark .comment-list__empty {
-  color: #a0aec0;
 }

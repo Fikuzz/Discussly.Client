@@ -1,0 +1,246 @@
+/* Контейнер дерева комментариев */
+.comment-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.comment-children-line{
+  width: 20px;
+  padding-left: 20px;
+  cursor: pointer;
+}
+
+.comment-children-line:hover > .comment-connector-horizontal,
+.comment-children-line:hover > .comment-connector{
+  border-color: #656d76;
+}
+
+/* Вертикальная линия для связи */
+.comment-connector-horizontal {
+  position: relative;
+  content: '';
+  top: -10px;
+  height: 100%;
+  border-left: 2px solid #a6a9ac;
+  z-index: 1;
+}
+
+/* Горизонтальная линия соединения */
+.comment-connector {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid #a6a9ac;
+  border-top: 0;
+  border-right: 0;
+  border-radius: 0 0 0 10px;
+  z-index: 1;
+}
+
+.comment-children:last-child > .comment-children-line > .comment-connector-horizontal {
+  display: none;
+}
+
+/* Карточка комментария */
+.comment-card {
+  position: relative;
+  background: white;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-left: 0;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.comment-card:hover {
+  border-color: #d0d7de;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Заголовок комментария */
+.comment-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.comment-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.comment-author {
+  font-weight: 600;
+  color: #24292f;
+  font-size: 14px;
+}
+
+.comment-date {
+  font-size: 12px;
+  color: #656d76;
+}
+
+/* Кнопка сворачивания */
+.collapse-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #656d76;
+  font-size: 12px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.collapse-btn:hover {
+  background: #f6f8fa;
+  color: #24292f;
+}
+
+.collapse-btn__icon {
+  transition: transform 0.2s ease;
+}
+
+.collapse-btn__icon--collapsed {
+  transform: rotate(-90deg);
+}
+
+/* Содержимое комментария */
+.comment-content {
+  margin-bottom: 12px;
+}
+
+.comment-text {
+  margin: 0;
+  line-height: 1.5;
+  color: #24292f;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* Действия с комментарием */
+.comment-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 8px;
+  border-top: 1px solid #f6f8fa;
+}
+
+.comment-action {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #656d76;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.comment-action:hover {
+  background: #f6f8fa;
+  color: #24292f;
+}
+
+.comment-action--danger:hover {
+  background: #ffebe9;
+  color: #cf222e;
+}
+
+/* Дочерние комментарии */
+.comment-children {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+}
+
+.comment-children--collapsed {
+  display: none;
+}
+
+.collapsed-indicator {
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 8px 0 8px 32px;
+  font-size: 12px;
+  color: #656d76;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.collapsed-indicator:hover {
+  background: #eaeef2;
+  color: #24292f;
+}
+
+/* Форма ответа */
+.comment-reply-form {
+  margin: 12px 0 0 32px;
+  padding: 8px;
+  background: #f6f8fa;
+  border-radius: 6px;
+  border: 1px solid #d0d7de;
+}
+
+.comment-node{
+  flex: 1;
+  margin-top: 5px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .comment-children {
+    margin-left: 20px;
+  }
+  
+  .comment-node::before {
+    left: -12px;
+  }
+  
+  .comment-node::after {
+    left: -12px;
+    width: 10px;
+  }
+  
+  .collapsed-indicator {
+    margin-left: 20px;
+  }
+  
+  .comment-reply-form {
+    margin-left: 20px;
+  }
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.comment-children {
+  animation: fadeIn 0.2s ease;
+}

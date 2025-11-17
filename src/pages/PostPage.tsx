@@ -49,7 +49,7 @@ const PostPage: React.FC = () => {
             </article>
             <section className="comment-tree-content" aria-label="Комментарии">
                 {id &&
-                    <CommentList parentId={id} isSubCom={false}/>
+                    <CommentList parentId={id}/>
                 }
             </section>
         </main>

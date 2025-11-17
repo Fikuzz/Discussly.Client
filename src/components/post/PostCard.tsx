@@ -54,7 +54,7 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => {
           </div>
           <div className="post-actions">
             <Vote userVote={userVote} score={postScore} handleVote={handleVote}/>
-            <button className="action">💬 {post.commentCount}</button>
+            <span className="stat">💬 {post.commentCount}</span>
           </div>
         </div>
     );

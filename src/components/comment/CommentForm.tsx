@@ -8,13 +8,13 @@ import type { Comment } from "../../types/comment";
 const commentSvc = new commentService();
 
 interface CommentFormProps{
-    post: string;
+    postId: string;
     onCancel: () => void,
-    addComment: (comment: Comment) => void,
-    comment?: string,
+    onCommentAdded: (comment: Comment) => void,
+    parentCommentId?: string,
 }
 
-const CommentForm: React.FC<CommentFormProps> = ({ post, onCancel, addComment, comment }) => {
+const CommentForm: React.FC<CommentFormProps> = ({ postId, onCancel, onCommentAdded, parentCommentId }) => {
     const { user, loading } = useAuth();
     const [text, setText] = useState('');
 
@@ -29,12 +29,12 @@ const CommentForm: React.FC<CommentFormProps> = ({ post, onCancel, addComment, c
         try{
             const body : AddComment = {
                 text: text,
-                postId: post,
-                commentId: comment
+                postId: postId,
+                commentId: parentCommentId
             };
             const id = await commentSvc.send(body);
             const newComment = await commentSvc.getById(id);
-            addComment(newComment);
+            onCommentAdded(newComment);
         }
         catch(error){
             console.error(error,"error");
