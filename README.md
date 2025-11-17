@@ -27,3 +27,7 @@ This is the client-facing application that interacts with the Discussly backend 
 - **Fast Navigation** - Client-side routing where possible
 - **Clean Interface** - Modern, Reddit-inspired UI
 - **Real-time Updates** - Live content synchronization
+
+## 🌐 Related Projects
+
+- [**Discussly Backend**](https://github.com/Fikuzz/Discussly) - Core API and server implementation
