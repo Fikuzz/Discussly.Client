@@ -26,6 +26,10 @@ const CommentCard: React.FC<{ comment: Comment, isOwner: boolean }> = ({ comment
     setCommenting(true);
   }
 
+  const onSubCommentAdd = (comment: Comment) => {
+    setSubComments(prev => [comment, ...prev]);
+  }
+
   const handleVote = async(vote: number) => {
     if(user){
       vote = userVote == vote ? 0 : vote;
@@ -112,7 +116,7 @@ const CommentCard: React.FC<{ comment: Comment, isOwner: boolean }> = ({ comment
             )}
           </div>
           {commenting &&
-            <CommentForm key={comment.id} onCancel={onCommentingCancel} post={comment.postId} comment={comment.id}/>
+            <CommentForm key={comment.id} addComment={onSubCommentAdd} onCancel={onCommentingCancel} post={comment.postId} comment={comment.id}/>
           }
         </div>
         {/* Подкомментарии */}

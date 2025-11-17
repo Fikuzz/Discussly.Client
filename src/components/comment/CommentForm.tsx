@@ -3,10 +3,18 @@ import commentService from "../../services/commentService";
 import { useAuth } from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
 import type { AddComment } from "../../types/comment";
+import type { Comment } from "../../types/comment";
 
 const commentSvc = new commentService();
 
-const CommentForm: React.FC<{ post: string, onCancel: () => void, comment?: string }> = ({ post, onCancel, comment }) => {
+interface CommentFormProps{
+    post: string;
+    onCancel: () => void,
+    addComment: (comment: Comment) => void,
+    comment?: string,
+}
+
+const CommentForm: React.FC<CommentFormProps> = ({ post, onCancel, addComment, comment }) => {
     const { user, loading } = useAuth();
     const [text, setText] = useState('');
 
@@ -17,18 +25,22 @@ const CommentForm: React.FC<{ post: string, onCancel: () => void, comment?: stri
         checkAuth();
     }, [loading])
 
-    const onSending = () => {
+    const onSending = async () => {
         try{
             const body : AddComment = {
                 text: text,
                 postId: post,
                 commentId: comment
             };
-            console.log(body);
-            commentSvc.send(body);
+            const id = await commentSvc.send(body);
+            const newComment = await commentSvc.getById(id);
+            addComment(newComment);
         }
         catch(error){
             console.error(error,"error");
+        }
+        finally{
+            onCancel();
         }
     };
 

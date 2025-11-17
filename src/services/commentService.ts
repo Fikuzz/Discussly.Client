@@ -7,6 +7,10 @@ class commentService extends BaseService{
         return await this.get<Comment[]>(`/Comment/${id}/subcomments`, { method: "GET" });
     }
 
+    async getById (id: string): Promise<Comment> {
+        return await this.get<Comment>(`/Comment/${id}`);
+    }
+
     async send(body: AddComment): Promise<string> {
         return await this.post<string, AddComment>(`/Comment`,body);
     }

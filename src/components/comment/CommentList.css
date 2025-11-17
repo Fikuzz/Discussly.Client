@@ -8,13 +8,12 @@
 
 .comment-list__header {
   border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 16px;
-  margin-bottom: 20px;
+  padding: 16px 0;
 }
 
 .comment-list__title {
   margin: 0;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 600;
   color: #333;
 }
