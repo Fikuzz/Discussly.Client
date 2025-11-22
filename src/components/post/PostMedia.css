@@ -1,0 +1,19 @@
+.post-media-preview
+{
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.post-media
+{
+    display: flex;
+    justify-content: space-around;
+    gap: 4px;
+    margin: 20px 0;
+}
+
+.post-media-element
+{
+    max-width: 300px;
+    max-height: 300px;
+}

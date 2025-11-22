@@ -41,7 +41,7 @@ const UserInfo: React.FC<UserInfoProps> = ({
         <div className="post-author" onClick={handleContextMenu}>
             {user.avatarFileName ? (
                 <img
-                    src={`/avatars/${user.avatarFileName}`}
+                    src={`/media/avatars/${user.avatarFileName}`}
                     alt="Avatar" 
                     className="avatar-small"
                     onClick={handleUserPopupOpen}

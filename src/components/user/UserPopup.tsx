@@ -63,7 +63,7 @@ const UserPopup: React.FC<UserPopupProps> = ({
                 <div className="user-main">
                     {profile?.avatarFileName ? (
                         <img
-                            src={`/avatars/${profile?.avatarFileName}`}
+                            src={`/media/avatars/${profile?.avatarFileName}`}
                             alt="Avatar" 
                             className="avatar-small"
                             onClick={handleProfile}

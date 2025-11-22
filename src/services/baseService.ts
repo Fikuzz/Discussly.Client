@@ -43,7 +43,7 @@ export class BaseService {
         if (contentType && contentType.includes('application/json')) {
             return await response.json() as T;
         }
-        
+
         return await response.text() as T;
     }
 

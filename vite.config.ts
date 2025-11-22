@@ -13,7 +13,7 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
-      '/avatars': 
+      '/media': 
       {
         target: 'http://localhost:8080',
         changeOrigin: true,

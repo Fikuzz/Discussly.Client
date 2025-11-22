@@ -14,7 +14,6 @@ const communitySvc = new communityService();
 const CommunityPage: React.FC = () => {
     const { user, loading } = useAuth();
     const { id } = useParams<{ id : string}>();
-    const [isLoading, setLoading] = useState(true);
     const [community, setCommunity] = useState<Community | null>(null);
     const [activeTab, setActiveTab] = useState<'feed' | 'about' | 'moderators' | 'members'>('feed');
     const [Member, setMember] = useState<Member | undefined>(undefined);
@@ -71,9 +70,6 @@ const CommunityPage: React.FC = () => {
             }
             catch(error){
                 console.error("Failed to fetch community:", error);
-            }
-            finally {
-                setLoading(false);
             }
         };
 

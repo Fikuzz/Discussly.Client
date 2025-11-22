@@ -2,6 +2,7 @@ import type { Comment } from "../types/comment";
 import type { Post } from "../types/post";
 import BaseService from "./baseService";
 import type { CreatePost } from "../types/post";
+import type { Media } from "../types/media";
 
 class postService extends BaseService{
     async getPostComment (id: string): Promise<Comment[]> {
@@ -28,6 +29,10 @@ class postService extends BaseService{
             mediaFiles: post.MediaFiles
         });
         return await this.post<boolean, FormData>(`/Post`, formData);
+    }
+
+    async getMedia (id: string): Promise<Media[]> {
+        return await this.get<Media[]>(`/Post/${id}/media`);
     }
 }
 

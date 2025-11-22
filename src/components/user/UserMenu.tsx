@@ -62,7 +62,7 @@ function UserMenu() {
         <div className="user-avatar">
           {user.avatarFileName ? (
             <img 
-              src={`/avatars/${user.avatarFileName}?v=${Date.now()}`}
+              src={`/media/avatars/${user.avatarFileName}?v=${Date.now()}`}
               alt="Avatar" 
               className="avatar-image"
             />
@@ -82,7 +82,7 @@ function UserMenu() {
             <div className="user-avatar-small">
               {user.avatarFileName ? (
                 <img 
-                  src={`/avatars/${user.avatarFileName}?v=${Date.now()}`}
+                  src={`/media/avatars/${user.avatarFileName}?v=${Date.now()}`}
                   alt="Avatar" 
                 />
               ) : (

@@ -88,7 +88,7 @@ const ProfilePage: React.FC = () => {
           {profile.avatarFileName ? (
             <div>
               <img
-                src={`/avatars/${profile.avatarFileName}`}
+                src={`/media/avatars/${profile.avatarFileName}`}
                 alt="Avatar" 
                 className="avatar-xxl"
               />
