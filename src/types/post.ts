@@ -1,4 +1,5 @@
 import type { Community } from "./community";
+import type { Media } from "./media";
 import type { User } from "./user";
 
 export interface Post {
@@ -10,7 +11,7 @@ export interface Post {
     score: number;
     commentCount: number;
     createdAt: string;
-    mediaPreviewFileName?: string;
+    media: Media[];
 }
 
 export interface CreatePost {

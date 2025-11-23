@@ -9,7 +9,7 @@ import PostMedia from './PostMedia';
 
 const postSvc = new PostService();
 
-const PostCard: React.FC<{ post: Post, isPreview: boolean }> = ({ post, isPreview }) => {
+const PostCard: React.FC<{ post: Post }> = ({ post }) => {
   const {user} = useAuth();
   const [userVote, setUserVote] = useState(0);
   const [postScore, setPostScore] = useState(0);
@@ -53,7 +53,7 @@ const PostCard: React.FC<{ post: Post, isPreview: boolean }> = ({ post, isPrevie
             <p className="post-title">{post.title}</p>
             <p>{post.contentText}</p>
           </div>
-          <PostMedia postId={post.id} previewMedia={isPreview ? post.mediaPreviewFileName : undefined} />
+          <PostMedia media={post.media} />
           <div className="post-actions">
             <Vote userVote={userVote} score={postScore} handleVote={handleVote}/>
             <span className="stat">💬 {post.commentCount}</span>

@@ -1,59 +1,72 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./PostMedia.css";
 import type { Media } from "../../types/media";
-import postService from "../../services/postService";
 
-const PostSvc = new postService();
 interface PostMediaProps{
-    postId: string;
-    previewMedia: string | undefined;
+    media: Media[];
 }
 
-const PostMedia: React.FC<PostMediaProps> = ({postId, previewMedia = undefined}) =>{
+const PostMedia: React.FC<PostMediaProps> = ({media}) =>{
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-    const [media, setMedia] = useState<Media[]>()
+    const nextSlide = (e:React.MouseEvent) => {
+        e.stopPropagation();
+        setCurrentIndex((prev) => (prev + 1) % media.length);
+    };
 
-    useEffect(() => {
-        const fetchMedia = async () =>{
-            try
-            {
-                const fetchedMedia = await PostSvc.getMedia(postId)
-                setMedia(fetchedMedia);
-            }
-            catch(ex)
-            {
-                console.error(ex);
-            }
-        }
+    const prevSlide = (e:React.MouseEvent) => {
+        e.stopPropagation();
+        setCurrentIndex((prev) => (prev - 1 + media.length) % media.length);
+    };
 
-        fetchMedia();
-    }, [postId]);
+    const goToSlide = (e:React.MouseEvent ,index:number) => {
+        e.stopPropagation();
+        setCurrentIndex(index);
+    };
 
     if(!media || media?.length < 1)
         return null;
 
     return(
-        <div>
-            {previewMedia ? 
-            (
+        <div className="carousel">
+      <div 
+        className="carousel-track"
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+      >
+        {media.map((item, index) => (
+          <div key={index} className="carousel-slide">
+            {item.type === 'Image' ? (
                 <>
-                    <img
-                        src={`/media/${previewMedia}`}
-                        className="post-media-preview"
-                    />
+                    <img src={`/media/${item.path}/${item.name}`} className="carousel-background"/>
+                    <img src={`/media/${item.path}/${item.name}`} className="carousel-image" alt={`Slide ${index + 1}`} />
                 </>
-            ):(
-                <div className="post-media">
-                    {media.map(element =>(
-                            <img
-                                src={`/media/${element.path}/${element.name}`}
-                                className="post-media-element"
-                            />
-                    ))
-                    }
-                </div>
+            ) : (
+                <>
+                    <video muted disableRemotePlayback className="carousel-background">
+                        <source src={`/media/${item.path}/${item.name}`} type="video/mp4" />
+                    </video>
+                    <video controls className="carousel-video">
+                        <source src={`/media/${item.path}/${item.name}`} type="video/mp4" />
+                    </video>
+                </>
             )}
-        </div>
+          </div>
+        ))}
+      </div>
+
+      <button className="carousel-prev" onClick={prevSlide}>‹</button>
+      <button className="carousel-next" onClick={nextSlide}>›</button>
+
+      <div className="carousel-dots">
+        {media.map((_, index) => (
+          <span
+            key={index}
+            className={`dot ${index === currentIndex ? 'active' : ''}`}
+            onClick={(e) => goToSlide(e, index)}
+          />
+        ))}
+      </div>
+    </div>
     )
 }
 
