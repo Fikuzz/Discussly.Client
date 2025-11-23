@@ -23,6 +23,12 @@
   color: #333;
 }
 
+.file-select{
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+}
+
 .create-post__form {
   margin-bottom: 20px;
 }

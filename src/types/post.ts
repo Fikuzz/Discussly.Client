@@ -18,5 +18,5 @@ export interface CreatePost {
     Title: string;
     ContentText: string;
     CommunityId: string;
-    MediaFiles?: string[];
+    MediaFiles?: File[];
 }

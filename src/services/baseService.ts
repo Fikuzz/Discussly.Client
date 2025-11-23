@@ -87,17 +87,26 @@ export class BaseService {
         return JSON.stringify(data);
     }
 
-    protected createFormData(data: Record<string, string | string[] | undefined | File | Blob>): FormData {
+    protected createFormData(data: Record<string, string | string[] | undefined | File | File[] | Blob>): FormData {
         const formData = new FormData();
         
         Object.entries(data).forEach(([key, value]) => {
-            if (value !== undefined && value !== null) {
-                if (value instanceof File || value instanceof Blob) {
-                    formData.append(key, value);
-                } else {
-                    formData.append(key, value.toString());
-                }
+        if (value !== undefined && value !== null) {
+            if (Array.isArray(value)) {
+                // Обработка массивов
+                value.forEach(item => {
+                    if (item instanceof File || item instanceof Blob) {
+                        formData.append(key, item);
+                    } else {
+                        formData.append(key, item.toString());
+                    }
+                });
+            } else if (value instanceof File || value instanceof Blob) {
+                formData.append(key, value);
+            } else {
+                formData.append(key, value.toString());
             }
+        }
         });
         
         return formData;

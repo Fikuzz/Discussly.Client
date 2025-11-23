@@ -6,6 +6,7 @@ import communityService from '../services/communityService';
 import postService from '../services/postService';
 import type { Community } from '../types/community';
 import { useNavigate } from 'react-router-dom';
+import FileUpload from '../components/comment/FileUpload';
 
 const PostSvc = new postService();
 const CommunitySvc = new communityService();
@@ -16,6 +17,8 @@ const CreatePostForm : React.FC = () =>{
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [community, setCommunity] = useState<Community>();
     const { id } = useParams<{ id:string }>();
+
+    const [media, setMedia] = useState<File[]>([]);
 
     const navigate = useNavigate();
 
@@ -34,7 +37,7 @@ const CreatePostForm : React.FC = () =>{
           Title: title,
           ContentText: content,
           CommunityId: community?.id,
-          MediaFiles: undefined
+          MediaFiles: media
         }
         const postId = await PostSvc.createPost( post );
         navigate(`/post/${postId}`);
@@ -102,7 +105,9 @@ const CreatePostForm : React.FC = () =>{
                 {title.length}/200
               </div>
             </div>
-
+            <div className='file-select' onClick={(e) => e.stopPropagation()}>
+              <FileUpload onFilesSelect={setMedia}/>
+            </div>
             <div className="form-group">
               <textarea
                 className="form-textarea"
