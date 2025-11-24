@@ -9,10 +9,12 @@ export interface Comment {
     commentCount: number;
     score: number;
     isEdited: boolean;
+    mediaFileName?: string;
 }
 
 export interface AddComment{
     text: string;
     postId: string;
     commentId?: string;
+    media?: File;
 }

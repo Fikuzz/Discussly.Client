@@ -48,7 +48,7 @@ return(
                 <div className="user-avatar">
                     {member.user.avatarFileName ?
                     (<img
-                        src={`/avatars/${member.user.avatarFileName}`}
+                        src={`/media/avatars/${member.user.avatarFileName}`}
                         alt="Avatar" 
                         className="avatar-l"
                     />) :

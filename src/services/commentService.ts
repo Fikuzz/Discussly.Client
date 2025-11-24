@@ -12,7 +12,13 @@ class commentService extends BaseService{
     }
 
     async send(body: AddComment): Promise<string> {
-        return await this.post<string, AddComment>(`/Comment`,body);
+        const commentData = this.createFormData({
+            text: body.text,
+            postId: body.postId,
+            commentId: body.commentId,
+            media: body.media
+        });
+        return await this.post<string, FormData>(`/Comment`, commentData);
     }
 
     async getUserVote(id: string): Promise<number>{

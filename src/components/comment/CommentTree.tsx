@@ -115,6 +115,11 @@ const CommentTree: React.FC<CommentTreeProps> = ({
             </button>
           )}
           </div>
+          {comment.mediaFileName &&
+          <div className='comment-media'>
+            <img className='comment-media-image' src={`/media/${comment.mediaFileName}`}/>
+          </div>
+          }
 
           <div className="comment__text">
             <p className='comment-text'>{comment.text}</p>
