@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import type { Community, Member } from '../types/community';
 import './CommunityPage.css';
 import { useAuth } from '../hooks/useAuth';
@@ -58,7 +58,9 @@ const CommunityPage: React.FC = () => {
     const handleManageModerators = () => console.log('Manage moderators');
     useEffect(() => {
         const fetchCommunity = async () => {
-            if(loading) return;
+            if(loading){
+              return;
+            }
             try{
                 let fetchedCommunity : Community;
                 if(id){
@@ -69,12 +71,13 @@ const CommunityPage: React.FC = () => {
                 }
             }
             catch(error){
-                console.error("Failed to fetch community:", error);
+              setMember(undefined);
+              console.error("Failed to fetch community:", error);
             }
         };
 
         fetchCommunity();
-    }, [id, loading]);
+    }, [id, loading, user]);
 
   return (
     <div className="community-page">
