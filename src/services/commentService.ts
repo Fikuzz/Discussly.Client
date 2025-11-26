@@ -28,6 +28,10 @@ class commentService extends BaseService{
     async sendUserVote(id: string, vote: number): Promise<boolean>{
         return await this.post<boolean, number>(`/Comment/${id}/vote?voteType=${vote}`, vote);
     }
+
+    async deleteComment(id: string): Promise<boolean> {
+        return await this.delete<boolean>(`/Comment/${id}/delete`);
+    }
 }
 
 export default commentService;

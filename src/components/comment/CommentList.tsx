@@ -13,6 +13,10 @@ const CommentList: React.FC<{ parentId: string}> = ({ parentId }) => {
   const [loading, setLoading] = React.useState<boolean>(true);
   const [showCommentForm, setShowCommentForm] = useState(false);
   
+  const RemoveComment = (comment: Comment) =>{
+    setComments(prev => prev.filter(c => c.id !== comment.id));
+  }
+
   const onCommentAdd = (comment: Comment) => {
     setComments(prev => [comment, ...prev]);
   }
@@ -61,7 +65,7 @@ const CommentList: React.FC<{ parentId: string}> = ({ parentId }) => {
            <div className="comment-list__empty">Комментариев пока нет.</div>
          ) : (
              comments.map((comment) => (
-                 <CommentTree key={comment.id} comment={comment} isOwner={false} isRoot={true}/>
+                 <CommentTree key={comment.id} comment={comment} isRoot={true} onDeleting={RemoveComment}/>
              ))
          )}
       </div>
