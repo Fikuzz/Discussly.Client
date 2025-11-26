@@ -143,6 +143,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
                     src={previewUrls[index]} 
                     className="carousel-image" 
                     alt={`Slide ${index + 1}`} 
+                    onContextMenu={(e) => e.preventDefault()}
                   />
                 </>
               ) : (
@@ -151,12 +152,10 @@ const FileUpload: React.FC<FileUploadProps> = ({
                     muted 
                     disableRemotePlayback 
                     className="carousel-background"
-                    autoPlay
-                    loop
                   >
                     <source src={previewUrls[index]} type={file.type} />
                   </video>
-                  <video controls className="carousel-video">
+                  <video controls className="carousel-video" onContextMenu={(e) => e.preventDefault()}>
                     <source src={previewUrls[index]} type={file.type} />
                   </video>
                 </>

@@ -99,25 +99,11 @@ const CommentTree: React.FC<CommentTreeProps> = ({
               user = {comment.author}
               createdAt= {comment.createdAt}/>
           </div>
-
-          {hasChildren && (
-            <button 
-              className="collapse-btn"
-              onClick={toggleCollapse}
-              title={isCollapsed ? 'Развернуть' : 'Свернуть'}
-            >
-              <span className={`collapse-btn__icon ${isCollapsed ? 'collapse-btn__icon--collapsed' : ''}`}>
-                ▼
-              </span>
-              <span className="reply-count">
-                {childCount}
-              </span>
-            </button>
-          )}
+          
           </div>
           {comment.mediaFileName &&
           <div className='comment-media'>
-            <img className='comment-media-image' src={`/media/${comment.mediaFileName}`}/>
+            <img className='comment-media-image' src={`/media/${comment.mediaFileName}`} alt='Не удалось загрузить изображение'/>
           </div>
           }
 
